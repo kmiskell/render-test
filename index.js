@@ -3,6 +3,7 @@ const cors = require('cors')
 const app = express()
 
 app.use(express.json()) // This adds the json-parser to the app
+app.use(express.static('dist'))
 app.use(cors())
 
 let notes = [
