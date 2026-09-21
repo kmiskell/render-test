@@ -1,0 +1,20 @@
+{
+  "name": "render-test",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/kmiskell/render-test#readme",
+  "bugs": {
+    "url": "https://github.com/kmiskell/render-test/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kmiskell/render-test.git"
+  },
+  "license": "MIT",
+  "author": "Kylia Miskell",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
