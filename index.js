@@ -1,6 +1,8 @@
+require('dotenv').config()
 const express = require('express')
-const app = express()
 const Note = require('./models/note')
+
+const app = express()
 
 app.use(express.json()) // This adds the json-parser to the app
 app.use(express.static('dist'))
@@ -57,7 +59,7 @@ app.post('/api/notes', (request, response) => {
     response.json(note)
 })
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
 })
