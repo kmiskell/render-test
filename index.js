@@ -4,12 +4,10 @@ const Note = require('./models/note')
 
 const app = express()
 
-app.use(express.json()) // This adds the json-parser to the app
 app.use(express.static('dist'))
+app.use(express.json()) // This adds the json-parser to the app
 
-app.get('/', (request, response) => {
-    response.send('<h1>Hello World</h1>')
-})
+// ROUTES
 
 app.get('/api/notes', (request, response) => {
     Note.find({}).then(notes=> {
@@ -36,13 +34,6 @@ app.delete('/api/notes/:id', (request, response) => {
     response.status(204).end()
 })
 
-const generateId = () => {
-  const maxId = notes.length > 0
-    ? Math.max(...notes.map(n => Number(n.id)))
-    : 0
-  return String(maxId + 1)
-}
-
 app.post('/api/notes', (request, response) => {
     const body = request.body
     
@@ -60,6 +51,15 @@ app.post('/api/notes', (request, response) => {
         response.json(savedNote)
     })
 })
+
+// HANDLE UNKNOWN ENDPOINTS
+
+const unknownEndpoint = (request, response) => {
+    response.status(404).send({ error: 'unknown endpoint'})
+}
+app.use(unknownEndpoint)
+
+// HANDLE ERRORS
 
 const errorHandler = (error, request, response, next) => {
     console.error(error.message)
