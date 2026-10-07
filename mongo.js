@@ -7,7 +7,7 @@ if (process.argv.length < 3) {
 
 const password = process.argv[2]
 
-const url = `mongodb+srv://kyliamiskell_db_user:${password}@cluster0.yhznngn.mongodb.net/noteApp?appName=Cluster0`
+const url = `mongodb+srv://kyliamiskell_db_user:${password}@cluster0.yhznngn.mongodb.net/testNoteApp?appName=Cluster0`
 
 mongoose.set('strictQuery', false)
 mongoose.connect(url, {family: 4})
@@ -18,19 +18,12 @@ const notesSchema = new mongoose.Schema({
 
 const Note = mongoose.model('Note', notesSchema)
 
-Note.find({ important: true }).then(result => {
-    result.forEach(note => {
-        console.log(note)
-    })
-    mongoose.connection.close()
+const note = new Note({
+    content: 'Behold, a second note for the test DB!',
+    important: false,
 })
 
-//const note = new Note({
-//    content: 'Mongoose makes things easy!',
-//    important: true,
-//})
-
-//note.save().then(result => {
-//    console.log('note saved!')
-//    mongoose.connection.close()
-//})
+note.save().then(result => {
+    console.log('note saved!')
+    mongoose.connection.close()
+})
